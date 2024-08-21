@@ -1,0 +1,64 @@
+﻿@model cmsdn.Models.Session
+
+@{
+    ViewData["Title"] = "Add Session";
+    Layout = "~/Views/Shared/_LayoutSession.cshtml";
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <h2 class="my-4">Add Session</h2>
+
+            <form asp-action="AddSession" method="post">
+                @Html.AntiForgeryToken()
+
+                <div class="mb-3">
+                    <label asp-for="Date" class="form-label">Date</label>
+                    <input asp-for="Date" class="form-control" type="date" />
+                    <span asp-validation-for="Date" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Time" class="form-label">Time</label>
+                    <input asp-for="Time" class="form-control" type="time" />
+                    <span asp-validation-for="Time" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="TeacherName" class="form-label">Teacher Name</label>
+                    <select asp-for="TeacherName" class="form-control">
+                        <option value="">Select a Teacher</option>
+                        @foreach (var teacher in ViewBag.Teachers as IEnumerable<cmsdn.Models.Teacher>)
+                        {
+                            <option value="@teacher.Name">@teacher.Name</option>
+                        }
+                    </select>
+                    <span asp-validation-for="TeacherName" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Class" class="form-label">Class</label>
+                    <input asp-for="Class" class="form-control" />
+                    <span asp-validation-for="Class" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Subject" class="form-label">Subject</label>
+                    <input asp-for="Subject" class="form-control" />
+                    <span asp-validation-for="Subject" class="text-danger"></span>
+                </div>
+
+                <div class="text-end">
+                    <button type="submit" class="btn btn-primary">Add Session</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

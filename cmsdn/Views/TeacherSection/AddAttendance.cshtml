@@ -1,0 +1,38 @@
+﻿@model cmsdn.Models.AddAttendanceViewModel
+
+@{
+    ViewData["Title"] = "Add Attendance";
+    Layout = "~/Views/Shared/TeacherSection/_Layout.cshtml";
+}
+
+<h2>Attendance for @Model.Session.Class - @Model.Session.Subject on @Model.Session.Date.ToShortDateString()</h2>
+
+<form method="post" asp-action="AddAttendance">
+    @Html.AntiForgeryToken()
+    <input type="hidden" name="sessionId" value="@Model.Session.Id" />
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Present</th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (var i = 0; i < Model.StudentsAttendance.Count; i++)
+            {
+                <tr>
+                    <td>@Model.StudentsAttendance[i].StudentName</td>
+                    <td>
+                        <input type="hidden" name="studentsAttendance[@i].StudentId" value="@Model.StudentsAttendance[i].StudentId" />
+                        <input type="hidden" name="studentsAttendance[@i].StudentName" value="@Model.StudentsAttendance[i].StudentName" />
+                        <input type="checkbox" name="studentsAttendance[@i].IsPresent" value="true" @(Model.StudentsAttendance[i].IsPresent ? "checked" : "") />
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+    <a href="@Url.Action("Index", "TeacherSection")" class="btn btn-secondary">Back</a>
+</form>

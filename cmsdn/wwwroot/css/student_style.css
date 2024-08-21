@@ -1,0 +1,70 @@
+﻿/* wwwroot/css/student_style.css */
+
+body {
+    background-color: #f8f9fa;
+    font-family: 'Roboto', sans-serif;
+}
+
+.main-content {
+    padding: 20px;
+}
+
+.navbar {
+    margin-bottom: 20px;
+}
+
+.table-responsive {
+    margin-top: 20px;
+}
+
+.footer {
+    background-color: #f1f1f1;
+}
+
+.filter-search-container {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+    .filter-search-container .input-group {
+        margin-bottom: 10px;
+    }
+
+    .filter-search-container .input-group,
+    .filter-search-container .form-select {
+        max-width: 300px;
+        width: 100%;
+    }
+
+    .filter-search-container .btn {
+        width: 100%;
+    }
+
+.btn-danger {
+    background-color: #dc3545;
+    border-color: #dc3545;
+}
+
+    .btn-danger:hover {
+        background-color: #c82333;
+        border-color: #bd2130;
+    }
+
+@media (max-width: 767.98px) {
+    .navbar-brand {
+        font-size: 1.2rem;
+    }
+
+    .filter-search-container {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+        .filter-search-container .input-group,
+        .filter-search-container .form-select,
+        .filter-search-container .btn {
+            max-width: 100%;
+        }
+}

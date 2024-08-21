@@ -1,0 +1,63 @@
+﻿@model cmsdn.Models.StudentSectionViewModel
+@{
+    ViewData["Title"] = "Student Section";
+    Layout = "~/Views/Shared/StudentSection/_Layout.cshtml"; // Using the layout you provided
+}
+
+<!-- Display the student's details -->
+<div class="student-details mb-4">
+    <h3>Your Details:</h3>
+    <p><strong>Name:</strong> @Model.Student.Name</p>
+    <p><strong>Email:</strong> @Model.Student.Email</p>
+    <p><strong>Class:</strong> @Model.Student.Class</p>
+    <p><strong>Department:</strong> @Model.Student.Department</p>
+</div>
+
+<!-- Display the sessions or related data for the logged-in student -->
+<h3>Enrolled Sessions</h3>
+<div class="filter-search-container">
+    <div class="input-group">
+        <input type="text" class="form-control" id="searchName" placeholder="Search by class or subject" />
+        <button class="btn btn-primary" type="button" id="searchButton">Search</button>
+    </div>
+    <div class="input-group mt-2">
+        <select class="form-select" id="filterClass">
+            <option value="">All Classes</option>
+            @foreach (var sessionClass in Model.Sessions.Select(s => s.Class).Distinct())
+            {
+                <option value="@sessionClass">@sessionClass</option>
+            }
+        </select>
+    </div>
+</div>
+
+<!-- Display sessions or related data in a responsive table -->
+<div class="table-responsive">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Time</th>
+                <th>Class</th>
+                <th>Subject</th>
+                <th>Teacher Name</th>
+            </tr>
+        </thead>
+        <tbody id="sessionTableBody">
+            @foreach (var session in Model.Sessions)
+            {
+                <tr>
+                    <td>@session.Date.ToShortDateString()</td>
+                    <td>@session.Time</td>
+                    <td>@session.Class</td>
+                    <td>@session.Subject</td>
+                    <td>@session.TeacherName</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+@section Scripts {
+    <script src="~/js/studentsection_script.js"></script>
+}

@@ -1,0 +1,67 @@
+﻿@model cmsdn.Models.TeacherSectionViewModel
+@{
+    ViewData["Title"] = "Teacher Section";
+    Layout = "~/Views/Shared/TeacherSection/_Layout.cshtml"; // Using the layout you provided
+}
+
+<!-- Display the teacher's details -->
+<div class="teacher-details mb-4">
+    <h3>Your Details:</h3>
+    <p><strong>Name:</strong> @Model.Teacher.Name</p>
+    <p><strong>Email:</strong> @Model.Teacher.Email</p>
+    <p><strong>Class Teacher Of:</strong> @Model.Teacher.ClassTeacherOf</p>
+</div>
+
+<!-- Display the allocated sessions for the logged-in teacher -->
+<h3>Allocated Sessions</h3>
+<div class="filter-search-container">
+    <div class="input-group">
+        <input type="text" class="form-control" id="searchName" placeholder="Search by subject" />
+        <button class="btn btn-primary" type="button" id="searchButton">Search</button>
+    </div>
+    <div class="input-group mt-2">
+        <select class="form-select" id="filterClass">
+            <option value="">All Classes</option>
+            @foreach (var sessionClass in Model.Sessions.Select(s => s.Class).Distinct())
+            {
+                <option value="@sessionClass">@sessionClass</option>
+            }
+        </select>
+    </div>
+</div>
+
+<!-- Display sessions in a responsive table -->
+<div class="table-responsive">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Time</th>
+                <th>Class</th>
+                <th>Subject</th>
+                <th>Add Attendance</th> <!-- Adjusted according to your request -->
+            </tr>
+        </thead>
+        <tbody id="sessionTableBody">
+            @foreach (var session in Model.Sessions)
+            {
+                <tr>
+                    <td>@session.Date.ToShortDateString()</td>
+                    <td>@session.Time</td>
+                    <td>@session.Class</td>
+                    <td>@session.Subject</td>
+                    <td>
+                    
+                        <a href="@Url.Action("AddAttendance", "TeacherSection", new { sessionId = session.Id })" class="btn btn-primary">Add Attendance</a>
+                    
+
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+@section Scripts {
+    <script src="~/js/teachersection_script.js"></script>
+}

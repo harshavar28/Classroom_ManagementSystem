@@ -1,0 +1,45 @@
+﻿@model List<cmsdn.Models.StudentReportViewModel>
+
+@{
+    ViewData["Title"] = "Student Attendance Reports";
+    Layout = "~/Views/Shared/StudentSection/_Layout.cshtml";
+}
+
+<h2>Attendance Reports</h2>
+
+@if (Model.Any())
+{
+    var groupedSessions = Model.GroupBy(r => r.SessionId);
+
+    foreach (var sessionGroup in groupedSessions)
+    {
+        var firstRecord = sessionGroup.First();
+        <div class="session-report">
+            <h3>Session: @firstRecord.Subject (@firstRecord.SessionDate.ToShortDateString())</h3>
+            <p><strong>Class:</strong> @firstRecord.Class</p>
+            <p><strong>Time:</strong> @firstRecord.SessionTime</p>
+
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Attendance</th>
+                        <th>Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var report in sessionGroup)
+                    {
+                        <tr>
+                            <td>@(report.IsPresent ? "Present" : "Absent")</td>
+                            <td>@report.AttendanceDate.ToShortDateString()</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+}
+else
+{
+    <p>No attendance records found.</p>
+}

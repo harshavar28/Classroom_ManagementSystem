@@ -1,0 +1,66 @@
+﻿@model IEnumerable<cmsdn.Models.Teacher>
+
+@{
+    ViewData["Title"] = "Teacher Portal";
+    Layout = "~/Views/Shared/_LayoutTeacher.cshtml";
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12 ms-sm-auto col-lg-12 px-md-4">
+            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                <h1 class="h2">Registered Teachers</h1>
+            </div>
+
+            <div class="filter-search-container">
+                <div class="input-group">
+                    <input type="text" class="form-control" id="searchName" placeholder="Search by name" />
+                    <button class="btn btn-primary" type="button" id="searchButton">Search</button>
+                </div>
+                <div class="input-group">
+                    <select class="form-select" id="filterDepartment">
+                        <option value="">All Departments</option>
+                        @foreach (var department in Model.Select(t => t.Department).Distinct())
+                        {
+                            <option value="@department">@department</option>
+                        }
+                    </select>
+                </div>
+            </div>
+
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Department</th>
+                            <th>Class Teacher Of</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="teacherTableBody">
+                        @foreach (var teacher in Model)
+                        {
+                            <tr data-teacher-id="@teacher.Id">
+                                <td>@teacher.Name</td>
+                                <td>@teacher.Email</td>
+                                <td>@teacher.Department</td>
+                                <td>@teacher.ClassTeacherOf</td>
+                                <td>
+                                    <button class="btn btn-danger delete-teacher-button">Delete</button>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<form asp-action="DeleteTeacher" method="post" id="deleteForm" style="display:none;">
+    @Html.AntiForgeryToken()
+</form>
+
+<script src="~/js/teacher_script.js"></script>

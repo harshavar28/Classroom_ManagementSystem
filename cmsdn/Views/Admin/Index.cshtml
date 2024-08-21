@@ -1,0 +1,54 @@
+﻿@model IEnumerable<cmsdn.Models.Admin>
+
+@{
+    ViewData["Title"] = "Admin Portal";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12 ms-sm-auto col-lg-12 px-md-4">
+            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                <h1 class="h2">ADMIN PORTAL</h1>
+            </div>
+
+            <div class="welcome-message mb-4">
+                <p>Welcome to the admin portal! Use the top navigation options to manage teachers, students, and sessions.</p>
+            </div>
+
+            <div class="admin-description mb-5">
+                <p class="lead">This portal allows administrators to manage all aspects of the classroom environment, including teacher assignments, student records, and session scheduling.</p>
+            </div>
+
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="card text-white bg-primary mb-3">
+                        <div class="card-body">
+                            <h5 class="card-title">Manage Teachers</h5>
+                            <p class="card-text">Add, edit, or remove teachers.</p>
+                            <a href="@Url.Action("Index", "Teacher")" class="btn btn-light">Go to Teachers</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card text-white bg-success mb-3">
+                        <div class="card-body">
+                            <h5 class="card-title">Manage Students</h5>
+                            <p class="card-text">View and manage student records.</p>
+                            <a href="@Url.Action("Index", "Student")" class="btn btn-light">Go to Students</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card text-white bg-info mb-3">
+                        <div class="card-body">
+                            <h5 class="card-title">Manage Sessions</h5>
+                            <p class="card-text">Set up and monitor sessions.</p>
+                            <a href="@Url.Action("Index", "Session")" class="btn btn-light">Go to Sessions</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

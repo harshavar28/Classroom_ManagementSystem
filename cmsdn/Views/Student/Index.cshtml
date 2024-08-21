@@ -1,0 +1,74 @@
+﻿@model IEnumerable<cmsdn.Models.Student>
+
+@{
+    ViewData["Title"] = "Student Portal";
+    Layout = "~/Views/Shared/_LayoutStudent.cshtml";
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12 ms-sm-auto col-lg-12 px-md-4">
+            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                <h1 class="h2">Registered Students</h1>
+            </div>
+
+            <div class="filter-search-container">
+                <div class="input-group">
+                    <input type="text" class="form-control" id="searchName" placeholder="Search by name" />
+                    <button class="btn btn-primary" type="button" id="searchButton">Search</button>
+                </div>
+                <div class="input-group">
+                    <select class="form-select" id="filterClass">
+                        <option value="">All Classes</option>
+                        @foreach (var studentClass in Model.Select(s => s.Class).Distinct())
+                        {
+                            <option value="@studentClass">@studentClass</option>
+                        }
+                    </select>
+                </div>
+                <div class="input-group">
+                    <select class="form-select" id="filterDepartment">
+                        <option value="">All Departments</option>
+                        @foreach (var department in Model.Select(s => s.Department).Distinct())
+                        {
+                            <option value="@department">@department</option>
+                        }
+                    </select>
+                </div>
+            </div>
+
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Class</th>
+                            <th>Department</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="studentTableBody">
+                        @foreach (var student in Model)
+                        {
+                            <tr data-student-id="@student.Id">
+                                <td>@student.Name</td>
+                                <td>@student.Email</td>
+                                <td>@student.Class</td>
+                                <td>@student.Department</td>
+                                <td>
+                                    <button class="btn btn-danger delete-student-button">Delete</button>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<form asp-action="DeleteStudent" method="post" id="deleteForm" style="display:none;">
+    @Html.AntiForgeryToken()
+</form>
+
+<script src="~/js/student_script.js"></script>

@@ -1,0 +1,70 @@
+﻿body {
+    background-color: #f7f9fc; /* Light background for the entire page */
+}
+
+.left-section {
+    background-color: #343a40; /* Dark background for the left section */
+    color: #fff; /* White text for contrast */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    padding: 20px;
+}
+
+.right-section {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    padding: 20px;
+}
+
+.login-card {
+    width: 100%;
+    max-width: 400px; /* Limit max width for the form */
+    background-color: #fff; /* White background for the card */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
+    border-radius: 10px; /* Rounded corners for a modern look */
+    padding: 30px; /* Padding inside the card */
+}
+
+    .login-card h3 {
+        margin-bottom: 30px; /* Increased margin for more space under the heading */
+        font-weight: 600; /* Bold heading */
+        color: #343a40; /* Dark color for the heading */
+    }
+
+.form-group {
+    margin-bottom: 20px; /* Increased margin for better spacing between fields */
+}
+
+    .form-group label {
+        font-weight: 500;
+    }
+
+    .form-group input,
+    .form-group select {
+        border-radius: 5px;
+        padding: 10px; /* Added padding for better input field spacing */
+    }
+
+.btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+    border-radius: 5px;
+    padding: 12px 20px; /* Increased padding for a more prominent button */
+    font-size: 16px;
+    font-weight: 500;
+    margin-top: 10px; /* Added margin above the button */
+}
+
+    .btn-primary:hover {
+        background-color: #0056b3;
+        border-color: #004085;
+    }
+
+.change-password-link {
+    text-align: center;
+    margin-top: 20px; /* Maintained space above the "Change Password" link */
+}
